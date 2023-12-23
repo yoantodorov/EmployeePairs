@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class EmployeeProjectService {
     public static Map<Integer, Map<Integer, List<TimeInterval>>> projectEmployeesMap = new HashMap<>();
-    private static EmployeeProjectRepository repository = EmployeeProjectRepository.getInstance();
+    private static final EmployeeProjectRepository repository = EmployeeProjectRepository.getInstance();
 
     public static void ProjectEmployeesMapping() {
         List<EmployeeProject> employeeProjectList = repository.getEmployeeProjectList();
@@ -43,7 +43,9 @@ public class EmployeeProjectService {
                         List<TimeInterval> timeIntervals1 = employeesMap.get(empID);
                         List<TimeInterval> timeIntervals2 = employeesMap.get(empID2);
                         long days = TimeIntervalService.getTotalOverlapDays(timeIntervals1, timeIntervals2);
-                        EmployeePairService.employeePairMapping(empID, empID2, projectID, days);
+                        if (days>0){
+                            EmployeePairService.employeePairMapping(empID, empID2, projectID, days);
+                        }
                     }
                 }
             }

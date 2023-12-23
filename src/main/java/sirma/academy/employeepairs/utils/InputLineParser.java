@@ -2,18 +2,15 @@ package sirma.academy.employeepairs.utils;
 
 import sirma.academy.employeepairs.model.EmployeeProject;
 import sirma.academy.employeepairs.model.TimeInterval;
-import sirma.academy.employeepairs.repository.EmployeeProjectRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class InputLineParser {
 
-    private static final EmployeeProjectRepository repository = EmployeeProjectRepository.getInstance();
-
-
-    public static void parse(String line) {
+    public static EmployeeProject parse(String line) {
         String[] input = line.split("\\s*,\\s*");
+        EmployeeProject parsedLine = null;
         if (input.length == 4) {
             try {
                 int empID = Integer.parseInt(input[0]);
@@ -27,7 +24,7 @@ public class InputLineParser {
                     dateTo = DateFormatParser.parse(input[3]);
                 }
 
-                repository.addEmployeeProject(new EmployeeProject(empID, projectID, new TimeInterval(dateFrom, dateTo)));
+                parsedLine = new EmployeeProject(empID, projectID, new TimeInterval(dateFrom, dateTo));
             } catch (NumberFormatException e) {
                 System.err.println(Constants.EMPID_PROJECTID_PARSE_ERR + line);
                 e.printStackTrace();
@@ -43,6 +40,6 @@ public class InputLineParser {
             System.err.println(Constants.INVALID_CSV_FORMAT_ERR + line);
             System.exit(1);
         }
-
+        return parsedLine;
     }
 }

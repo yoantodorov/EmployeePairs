@@ -1,7 +1,6 @@
 package sirma.academy.employeepairs.csv;
 
 import sirma.academy.employeepairs.model.EmployeeProject;
-import sirma.academy.employeepairs.repository.EmployeeProjectRepository;
 import sirma.academy.employeepairs.utils.Constants;
 
 import java.io.FileWriter;
@@ -25,7 +24,7 @@ public class CSVWriter {
                 );
                 writer.println(line);
             }
-            System.out.println(Constants.WRITE_SUCCESS);
+            System.out.println(Constants.WRITE_SUCCESS_MSG);
         } catch (IOException e) {
             System.err.println(Constants.WRITE_ERR + e.getMessage());
         }

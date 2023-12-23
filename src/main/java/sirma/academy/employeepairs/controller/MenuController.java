@@ -1,6 +1,5 @@
 package sirma.academy.employeepairs.controller;
 
-import sirma.academy.employeepairs.csv.CSVReader;
 import sirma.academy.employeepairs.model.EmployeeProject;
 import sirma.academy.employeepairs.model.TimeInterval;
 import sirma.academy.employeepairs.repository.EmployeeProjectRepository;
@@ -18,7 +17,7 @@ public class MenuController {
 
 
     public static void showMenu() {
-        CSVReader.read();
+
         boolean isRunning = true;
 
         while (isRunning) {

@@ -2,6 +2,7 @@ package sirma.academy.employeepairs.service;
 
 import sirma.academy.employeepairs.model.EmployeePair;
 import sirma.academy.employeepairs.model.ProjectInfo;
+import sirma.academy.employeepairs.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,7 +26,7 @@ public class EmployeePairService {
             EmployeePair pairWithMostDays = employeePairs.get(0);
             System.out.println(pairWithMostDays);
         } else {
-            System.out.println("No pairs found.");
+            System.out.println(Constants.PAIRS_NOT_FOUND_MSG);
         }
         employeePairs.clear();
         EmployeeProjectService.projectEmployeesMap.clear();
@@ -56,7 +57,6 @@ public class EmployeePairService {
         EmployeeProjectService.ProjectEmployeesMapping();
         EmployeeProjectService.getUniquePairs();
         sortByTotalDaysTogether(employeePairs);
-
         System.out.println(employeePairs);
 
         employeePairs.clear();

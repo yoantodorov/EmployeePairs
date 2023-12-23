@@ -1,9 +1,9 @@
 package sirma.academy.employeepairs.repository;
 
+import sirma.academy.employeepairs.csv.CSVReader;
 import sirma.academy.employeepairs.csv.CSVWriter;
 import sirma.academy.employeepairs.model.EmployeeProject;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +11,10 @@ import java.util.Optional;
 public class EmployeeProjectRepository {
 
     private static final EmployeeProjectRepository INSTANCE = new EmployeeProjectRepository();
-    private final List<EmployeeProject> employeeProjectList = new ArrayList<>();
+    private final List<EmployeeProject> employeeProjectList;
 
     private EmployeeProjectRepository() {
+        this.employeeProjectList = CSVReader.read();
     }
 
     public static EmployeeProjectRepository getInstance() {

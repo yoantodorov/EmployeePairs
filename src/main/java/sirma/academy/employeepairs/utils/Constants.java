@@ -19,9 +19,10 @@ public class Constants {
     public static final String INVALID_CSV_FORMAT_ERR = "Invalid data format in the CSV line. Line: ";
     public static final String INVALID_DATE_FORMAT_ERR = "Invalid date format. Line: ";
     public static final String DATE_ERR = "DateTo must be after DateFrom";
-    public static final String WRITE_SUCCESS = "Employee projects written to CSV successfully.";
+    public static final String WRITE_SUCCESS_MSG = "Employee projects written to CSV successfully.";
     public static final String WRITE_ERR = "Error writing to CSV file: ";
     public static final String MENU_CHOICE_ERR = "Invalid input, enter a number from 1 to 6.";
     public static final String INPUT_NOT_NUM_ERR = "Invalid input, enter a valid integer: ";
     public static final String INVALID_FORMAT_ERR = "Invalid input format.";
+    public static final String PAIRS_NOT_FOUND_MSG = "No pairs found";
 }
