@@ -10,6 +10,7 @@ import sirma.academy.employeepairs.utils.Constants;
 import sirma.academy.employeepairs.utils.DateFormatParser;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class MenuController {
@@ -39,12 +40,12 @@ public class MenuController {
                     case 4 -> showAllPairs();
                     case 5 -> showAll();
                     case 6 -> isRunning = false;
-                    default -> System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                    default -> System.out.println(Constants.MENU_CHOICE_ERR);
                 }
             }
             else {
                 scanner.nextLine();
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println(Constants.INPUT_NOT_NUM_ERR);
             }
         }
     }
@@ -62,22 +63,36 @@ public class MenuController {
     }
     private static void addNewEntry() {
 
-        System.out.println("Enter EmployeeID");
+        try {
+            int employeeID = readIntegerInput("Enter EmployeeID:");
+            int projectID = readIntegerInput("Enter ProjectID:");
 
-        int employeeID = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter ProjectID");
-        int projectID =Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter From Date");
-        LocalDate dateFrom = DateFormatParser.parse(scanner.nextLine());
-        System.out.println("Enter To Date");
-        LocalDate dateTo = DateFormatParser.parse(scanner.nextLine());
-        if (dateTo.isAfter(dateFrom)){
-            EmployeeProjectService.add(new EmployeeProject(employeeID,projectID,new TimeInterval(dateFrom,dateTo)));
-        }
-        else{
-            System.out.println(Constants.DATE_ERR);
+            System.out.println("Enter From Date (yyyy-MM-dd):");
+            LocalDate dateFrom = DateFormatParser.parse(scanner.nextLine());
+
+            System.out.println("Enter To Date (yyyy-MM-dd):");
+            LocalDate dateTo = DateFormatParser.parse(scanner.nextLine());
+
+            if (dateTo.isAfter(dateFrom)) {
+                EmployeeProjectService.add(new EmployeeProject(employeeID, projectID, new TimeInterval(dateFrom, dateTo)));
+            } else {
+                System.out.println(Constants.DATE_ERR);
+            }
+        } catch (DateTimeParseException | NumberFormatException e) {
+            System.out.println(Constants.INVALID_FORMAT_ERR);
         }
 
+    }
+
+    private static int readIntegerInput(String message) {
+        System.out.println(message);
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println(Constants.INPUT_NOT_NUM_ERR);
+            }
+        }
     }
 
     private static void saveToFile() {
